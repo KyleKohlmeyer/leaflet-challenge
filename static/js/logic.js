@@ -24,7 +24,9 @@ d3.json(link).then(function(response) {
       let mag = features[i].properties.mag;
       let depth = location.coordinates[2];
       let radius = mag * 25000;
-        
+      let x = location.coordinates[1]
+      let y = location.coordinates[0]  
+      
         // Color conditionals based on depth
         let color = "";
         if (depth < 10) {
@@ -51,7 +53,7 @@ d3.json(link).then(function(response) {
         }
 
         // Making the circles for each disaster at the coordinates
-        L.circle([location.coordinates[1], location.coordinates[0]], {
+        L.circle([x, y], {
 
             color: "black",
             fillColor: color,
@@ -59,7 +61,7 @@ d3.json(link).then(function(response) {
             radius: radius
             
         // Creating popup for each disaster     
-        }).bindPopup(`<h1>Earthquake Stats\</h1> <hr> <h3>Magnitude: ${mag}</h3> <h3>Depth: ${depth}</h3>`).addTo(myMap);
+        }).bindPopup(`<h1>Earthquake Stats\</h1> <hr> <h3>Magnitude: ${mag}</h3> <h3>Depth: ${depth}</h3> <h3>Coordinates: ${x}, ${y}</h3>`).addTo(myMap);
             //}).bindPopup(`<h1>${location.coordinates[3]}</h1> <hr> <h3>Magnitude: ${magnitude}</h3>`).addTo(myMap);
       
     }});
